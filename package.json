@@ -1,19 +1,21 @@
 {
-  "name": "moodlog-next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
-  },
-  "dependencies": {
-    "next": "10.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
-  },
-  "devDependencies": {
-    "@types/react": "^17.0.3",
-    "typescript": "^4.2.3"
-  }
+    "name": "moodlog-next",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "test": "cypress open"
+    },
+    "dependencies": {
+        "next": "10.1.2",
+        "react": "17.0.2",
+        "react-dom": "17.0.2"
+    },
+    "devDependencies": {
+        "@types/react": "^17.0.3",
+        "cypress": "^6.8.0",
+        "typescript": "^4.2.3"
+    }
 }
