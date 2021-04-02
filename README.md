@@ -32,3 +32,40 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Testing
+
+Cypress is used for all testing, to keep the amount of test writing as low as possible.
+
+### Best practices
+
+Inspiration can be watched from [this youtube video](https://www.youtube.com/watch?v=5XQOK0v_YRE)
+
+Short summary:
+
+- Create test files based on (shared) components and pages
+- Create a folder structure as follows:
+
+```cli
+articles\
+    article_details.spec.ts
+    article_new.spec.ts
+    articles_list.spec.ts
+author\
+    author_details_spec.ts
+shared\
+    header_spec.ts
+user\
+    login.spec.ts
+    register.spec.ts
+    settings.spec.ts
+```
+
+- ![](cypress/readme/user-handling-cypress.png)
+
+
+## Authentication
+
+[Keycloak](https://github.com/react-keycloak/react-keycloak#readme) is used for authentication.
+
+See the examples [here](https://github.com/react-keycloak/react-keycloak-examples/blob/master/examples/nextjs-app/pages/_app.tsx)
