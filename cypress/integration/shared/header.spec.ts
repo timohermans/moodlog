@@ -1,9 +1,15 @@
 describe('Header', () => {
-    beforeEach(() => {
-        cy.visit('http://localhost:3000');
+    it('has an option to log in', () => {
+        cy.visit('/');
+        cy.get('#login');
+
+        // figure out a way to mock the call to different server
     });
 
-    it('has an option to log in', () => {
-        cy.contains('button#login');
+
+    it('shows a welcome text for logged in user', () => {
+        cy.login({});
+
+        cy.contains('Welcome, Timo Tester');
     });
 });

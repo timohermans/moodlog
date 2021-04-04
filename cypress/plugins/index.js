@@ -11,12 +11,21 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
+require('dotenv').config()
 
 /**
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+  config.env.keycloak_username = process.env.KEYCLOAK_USERNAME
+  config.env.keycloak_password = process.env.KEYCLOAK_PASSWORD
+  config.env.keycloak_domain = process.env.REACT_APP_KEYCLOAK_DOMAIN
+  config.env.keycloak_scope = process.env.REACT_APP_KEYCLOAK_SCOPE
+  config.env.keycloak_client_id = process.env.REACT_APP_KEYCLOAK_CLIENTID
+  config.env.keycloak_realm = process.env.REACT_APP_KEYCLOAK_REALM
+
+  // plugins code ...
+
+  return config
 }

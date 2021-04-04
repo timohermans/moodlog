@@ -1,21 +1,20 @@
-import { useKeycloak } from '@react-keycloak/ssr'
-import { KeycloakInstance } from 'keycloak-js'
 import React, { ReactElement } from 'react'
+import NavBrand from './NavBrand'
+import NavLinks from './NavLinks'
+import NavProfile from './NavProfile'
 
 interface Props {}
 
 function Nav({}: Props): ReactElement {
-  const { keycloak } = useKeycloak<KeycloakInstance>()
-
   return (
-    <div>
-      {keycloak.authenticated ? (
-        <span>hello, mister</span>
-      ) : (
-        <button id="login" onClick={() => keycloak.login()}>
-          Login
-        </button>
-      )}
+    <div className="relative bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex justify-between items-center border-b-2 border-gray-100 py-6 space-x-10">
+          <NavBrand />
+          <NavLinks />
+          <NavProfile />
+        </div>
+      </div>
     </div>
   )
 }
