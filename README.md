@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Moodlog
 
 ## Getting Started
 
@@ -12,22 +12,38 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Hot reloading
+
+You can start editing pages by modifying `pages/index.js`. The page auto-updates as you edit the file.
+
+### API routes
 
 [API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Documentation
+### Testing
 
-To learn more about Next.js, take a look at the following resources:
+While running the development server (see commands above), run:
+
+```bash
+npm run test
+# or
+yarn test
+```
+
+## Documentation
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Cypress testing](https://cypress.io) - Testing tool used
+- [NextAuth.js](https://next-auth.js.org/) - Authentication package used to login to keycloak
+- [Tailwindcss](https://tailwindcss.com/docs) - Css utility framework (no more css files)
+- [Tailwindui](https://tailwindui.com/) - Component examples build with Tailwind
 
 ## Known issues
 
-- [Hot reload sometimes hangs](https://github.com/vercel/next.js/issues/10061)
+- [Hot reload sometimes hangs](https://github.com/vercel/next.js/issues/10061) - Note that I fixed this by not using LTS Node but latest as of writing (15.13.0)
 
 ## Testing
 
@@ -40,15 +56,13 @@ Inspiration can be watched from [this youtube video](https://www.youtube.com/wat
 Short summary:
 
 - Create test files based on (shared) components and pages
-- Create a folder structure as follows:
+- Folder structure as follows:
 
 ```cli
 articles\
     article_details.spec.ts
     article_new.spec.ts
     articles_list.spec.ts
-author\
-    author_details_spec.ts
 shared\
     header_spec.ts
 user\
@@ -57,14 +71,20 @@ user\
     settings.spec.ts
 ```
 
-- ![](cypress/readme/user-handling-cypress.png)
+- There are different types of authentication possible in Cypress. See image below
+
+![stub requests, static user, or dynamic user](cypress/readme/user-handling-cypress.png)
 
 ### Authentication in Cypress
 
-Authentication command is inspired from [cypress-keycloak](https://github.com/babangsund/cypress-keycloak). It is pretty slow though
+Authentication command is inspired from [cypress-keycloak](https://github.com/babangsund/cypress-keycloak). ~~It is pretty slow though~~
 
-## Authentication
+## Deployment
 
-[Keycloak](https://github.com/react-keycloak/react-keycloak#readme) is used for authentication.
+As of now, there is no deployment or CI/CD yet. There are still some things that need to be done for this:
 
-See the examples [here](https://github.com/react-keycloak/react-keycloak-examples/blob/master/examples/nextjs-app/pages/_app.tsx)
+- [ ] Setup in Drone.io
+- [ ] Create a command that resets database in testing
+- [ ] Run the command from Cypress before each test
+- [ ] Create a Dockerfile to run the application
+- [ ] Add the application to the general docker-compose of my home server
