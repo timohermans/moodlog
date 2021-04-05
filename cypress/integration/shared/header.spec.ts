@@ -9,6 +9,7 @@ describe('Header', () => {
 
     it('shows a welcome text for logged in user', () => {
         cy.login({});
+        cy.visit('/');
 
         cy.contains('Welcome, Timo Tester');
     });

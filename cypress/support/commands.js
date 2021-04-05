@@ -24,8 +24,6 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import createUUID from './createUUID';
-
 Cypress.Commands.add(
     'login',
     ({
@@ -34,11 +32,6 @@ Cypress.Commands.add(
     }) => {
         const usernameForm = username || Cypress.env('keycloak_username');
         const passwordForm = password || Cypress.env('keycloak_password');
-        const root = Cypress.env('keycloak_domain');
-        const client_id = Cypress.env('keycloak_client_id');
-        const realm = Cypress.env('keycloak_realm');
-        const scope = Cypress.env('keycloak_scope');
-        const redirect_uri = Cypress.env('keycloak_redirect_uri') || 'http://localhost:3000/api/auth/callback/keycloak';
 
         cy.request({
             url: `http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F`
@@ -78,6 +71,5 @@ Cypress.Commands.add(
                         },
                     });
             })
-        cy.visit('/');
     }
 );

@@ -14,7 +14,7 @@ export default NextAuth({
             params: { grant_type: "authorization_code" },
             scope: "openid profile email",
             profile: (profile) => ({ ...profile, id: profile.sub }),
-            clientId: "applocal",
+            clientId: process.env.REACT_APP_KEYCLOAK_CLIENTID,
             domain: process.env.REACT_APP_KEYCLOAK_DOMAIN,
             clientSecret: undefined,
             accessTokenUrl: `${baseUrl}/token`,
