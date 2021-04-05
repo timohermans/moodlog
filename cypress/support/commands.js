@@ -38,22 +38,28 @@ Cypress.Commands.add(
         const client_id = Cypress.env('keycloak_client_id');
         const realm = Cypress.env('keycloak_realm');
         const scope = Cypress.env('keycloak_scope');
-        const redirect_uri = Cypress.env('keycloak_redirect_uri') || 'http://localhost:3000';
+        const redirect_uri = Cypress.env('keycloak_redirect_uri') || 'http://localhost:3000/api/auth/callback/keycloak';
 
-        cy
-            .request({
-                url: `${root}/auth/realms/${realm}/protocol/openid-connect/auth`,
-                qs: {
-                    client_id,
-                    redirect_uri,
-                    scope,
-                    state: createUUID(),
-                    nonce: createUUID(),
-                    response_type: 'code',
-                    response_mode: 'fragment',
-                },
-            })
+        cy.request({
+            url: `http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F`
+        })
             .then((response) => {
+                const html = document.createElement('html');
+                html.innerHTML = response.body;
+
+                const form = html.querySelector('form');
+                const data = {};
+                new FormData(form).forEach((value, key) => data[key] = value);
+
+                return cy.request({
+                    url: form.action,
+                    method: form.method,
+                    form: true,
+                    body: data,
+                    followRedirect: true
+                });
+            })
+            .then(response => {
                 const html = document.createElement('html');
                 html.innerHTML = response.body;
 
@@ -65,7 +71,7 @@ Cypress.Commands.add(
                         form: true,
                         method: 'POST',
                         url: form[0].action,
-                        followRedirect: false,
+                        followRedirect: true,
                         body: {
                             username: usernameForm,
                             password: passwordForm,
@@ -73,7 +79,5 @@ Cypress.Commands.add(
                     });
             })
         cy.visit('/');
-        cy.get('#login').click();
-        cy.get('form').submit();
     }
 );
