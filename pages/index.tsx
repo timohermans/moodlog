@@ -13,56 +13,26 @@ export default function Home() {
       <Nav />
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="#">Moodlog</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
+        <section className="mx-10 sm:mx-32 my-6">
+          <h1
+            data-cy="title"
+            className="text-4xl sm:text-6xl text-blue-400 font-bold"
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
+            Feeling good
+          </h1>
+          <p data-cy="sub-title" className="text-2xl sm:text-4xl font-semibold">
+            The new <span className="text-blue-700">moodlog</span> utilities
+          </p>
+          <p
+            data-cy="description"
+            className="mt-4 sm:w-3/4 text-gray-600 text-xl"
           >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+            All the tools and tricks mentioned in the book can be used here for{' '}
+            <span className="">free</span>. Let this tool help you recover even
+            more quickly from all the anxieties or fears you have.
+          </p>
+        </section>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }

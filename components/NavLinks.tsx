@@ -29,21 +29,19 @@ const NavLinks = (props: Props) => {
   if (isLoading) return null
 
   return (
-    <>
+    <nav className="space-x-10">
       {navItemsToDisplay.map((navItem: NavItemData) => (
-        <nav className="space-x-10">
-          <Link href={navItem.href} passHref={true}>
-            <a
-              href="#"
-              className="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              aria-expanded="false"
-            >
-              {navItem.text}
-            </a>
-          </Link>
-        </nav>
+        <Link href={navItem.href} passHref={true} key={navItem.href}>
+          <a
+            href="#"
+            className="text-gray-500 group rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            aria-expanded="false"
+          >
+            {navItem.text}
+          </a>
+        </Link>
       ))}
-    </>
+    </nav>
   )
 }
 

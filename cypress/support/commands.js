@@ -59,7 +59,7 @@ Cypress.Commands.add(
                 const form = html.getElementsByTagName('form');
                 const isAuthorized = !form.length;
 
-                if (!isAuthorized)
+                if (!isAuthorized) {
                     return cy.request({
                         form: true,
                         method: 'POST',
@@ -70,6 +70,9 @@ Cypress.Commands.add(
                             password: passwordForm,
                         },
                     });
+                } else {
+                    cy.log('already logged in');
+                }
             })
     }
 );
