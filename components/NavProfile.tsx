@@ -3,7 +3,9 @@ import { signIn, signOut, useSession} from 'next-auth/client';
 interface Props {}
 
 const NavProfile = (props: Props) => {
-  const [session, loading] = useSession()
+  const [session, isLoading] = useSession()
+
+  if (isLoading) return null
 
   if (session) {
     return (
@@ -16,7 +18,7 @@ const NavProfile = (props: Props) => {
   return (
     <div className="hidden md:flex items-center justify-end md:flex-1">
       <a
-        id="login"
+        data-cy="login"
         onClick={() => signIn()}
         className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900 cursor-pointer"
       >
