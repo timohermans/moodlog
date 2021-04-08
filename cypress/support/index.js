@@ -18,3 +18,14 @@ import './commands'
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.Cookies.defaults({
+    preserve: ['next-auth.session-token', 'next-auth.csrf-token', 'next-auth.callback-url'],
+})
+
+beforeEach(() => {
+    cy.getCookies()
+        .then(cookies => {
+            if (!cookies.some(cookie => cookie.name === 'next-auth.session-token')) cy.login({});
+        });
+});

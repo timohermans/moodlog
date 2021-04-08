@@ -1,5 +1,7 @@
+import { GetServerSideProps } from 'next'
+import { getSession } from 'next-auth/client'
 import Head from 'next/head'
-import Nav from '../components/Nav'
+import HomeNav from '../components/HomeNav'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -10,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Nav />
+      <HomeNav />
 
       <main className={styles.main}>
         <section className="mx-10 sm:mx-32 my-6">

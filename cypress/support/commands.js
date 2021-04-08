@@ -30,49 +30,15 @@ Cypress.Commands.add(
         username = undefined,
         password = undefined,
     }) => {
-        const usernameForm = username || Cypress.env('keycloak_username');
-        const passwordForm = password || Cypress.env('keycloak_password');
+        cy.visit('/');
+        cy.get('[data-cy=login]').click();
 
-        cy.request({
-            url: `http://localhost:3000/api/auth/signin?callbackUrl=http%3A%2F%2Flocalhost%3A3000%2F`
-        })
-            .then((response) => {
-                const html = document.createElement('html');
-                html.innerHTML = response.body;
+        cy.url().then(url => {
+            if (url.indexOf(Cypress.config().baseUrl) !== -1) return;
 
-                const form = html.querySelector('form');
-                const data = {};
-                new FormData(form).forEach((value, key) => data[key] = value);
-
-                return cy.request({
-                    url: form.action,
-                    method: form.method,
-                    form: true,
-                    body: data,
-                    followRedirect: true
-                });
-            })
-            .then(response => {
-                const html = document.createElement('html');
-                html.innerHTML = response.body;
-
-                const form = html.getElementsByTagName('form');
-                const isAuthorized = !form.length;
-
-                if (!isAuthorized) {
-                    return cy.request({
-                        form: true,
-                        method: 'POST',
-                        url: form[0].action,
-                        followRedirect: true,
-                        body: {
-                            username: usernameForm,
-                            password: passwordForm,
-                        },
-                    });
-                } else {
-                    cy.log('already logged in');
-                }
-            })
+            cy.get('#username').type(username || Cypress.env('keycloak_username'));
+            cy.get('#password').type(password || Cypress.env('keycloak_password'));
+            cy.get('form').submit();
+        });
     }
 );

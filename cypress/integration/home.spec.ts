@@ -2,14 +2,15 @@ describe('Home', () => {
     it('Shows a hero page', () => {
         cy.visit('/');
 
-        cy.get('[data-cy=title]');
-        cy.get('[data-cy=sub-title]');
-        cy.get('[data-cy=description]')
+        cy.get('[data-cy=title]').should('exist');
+        cy.get('[data-cy=sub-title]').should('exist');
+        cy.get('[data-cy=description]').should('exist');
+        cy.get('[href="/dashboard"]').should('exist');
     });
 
-    it('automatically redirects to the dashboard after logging in', () => {
-        cy.login({});
+    it('Shows a login button when not logged in', () => {
+        cy.clearCookie('next-auth.session-token'); // please don't execute this too often, thanks. It will slow down tests immensely
         cy.visit('/');
-        cy.url().should('include', '/dashboard');
+        cy.get('[data-cy=login]').should('exist');
     });
 });
