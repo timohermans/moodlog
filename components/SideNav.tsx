@@ -1,16 +1,19 @@
-import { useSession } from 'next-auth/client'
-import { IoPersonCircleOutline } from 'react-icons/io5'
+import SideNavLinks from "./SideNavLinks"
+import SideNavLogout from "./SideNavLogout"
+import SideNavUser from './SideNavUser'
 
 interface Props {}
 
 const SideNav = (props: Props) => {
-  const [session] = useSession()
   return (
-    <div className="w-20 py-4 flex flex-col items-center">
-      <IoPersonCircleOutline data-cy="nav-user-picture" className="text-5xl" style={{ fill: 'white' }} />
-      <p className="text-xs font-bold    text-white">
-        {session.user.name.split(' ')[0]}
-      </p>
+    <div className="w-20 py-4 flex flex-col justify-between items-center text-white">
+      <div>
+        <SideNavUser />
+        <SideNavLinks />
+      </div>
+      <div>
+        <SideNavLogout />
+      </div>
     </div>
   )
 }

@@ -40,6 +40,7 @@ yarn test
 - [NextAuth.js](https://next-auth.js.org/) - Authentication package used to login to keycloak
 - [Tailwindcss](https://tailwindcss.com/docs) - Css utility framework (no more css files)
 - [Tailwindui](https://tailwindui.com/) - Component examples build with Tailwind
+- [React-icons](https://react-icons.github.io) - Library for inlining SVG of multiple SVG icons libs
 
 ## Known issues
 
