@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React from 'react'
-import SideNav from './SideNav'
+import SideNav from 'components/SideNav'
 
 interface Props {
   pageTitle: string
@@ -17,7 +17,7 @@ const DashboardLayout = (props: Props) => {
       <SideNav />
 
       <div className="p-2 w-full">
-        <main className="p-4 bg-white rounded-3xl h-full w-full">
+        <main className="p-4 bg-gray-100 rounded-3xl h-full w-full">
           {props.children}
         </main>
       </div>
