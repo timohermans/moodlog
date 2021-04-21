@@ -41,10 +41,21 @@ yarn test
 - [Tailwindcss](https://tailwindcss.com/docs) - Css utility framework (no more css files)
 - [Tailwindui](https://tailwindui.com/) - Component examples build with Tailwind
 - [React-icons](https://react-icons.github.io) - Library for inlining SVG of multiple SVG icons libs
+- [Prisma](https://www.prisma.io) - ORM for typescript (with migrations :) )
 
 ## Known issues
 
 - [Hot reload sometimes hangs](https://github.com/vercel/next.js/issues/10061) - Note that I fixed this by not using LTS Node but latest as of writing (15.13.0)
+
+## Persistence
+
+Prisma is used for storing data. Prisma is a ORM that I'm using with postgresql (again). It uses a schema for modeling your domain to your db, which is pretty nifty.
+
+Change something in schema.prisma and typescript will automagicall be generated for you. To create a db migration and apply it:
+
+```bash
+npx prisma migrate dev
+```
 
 ## Testing
 

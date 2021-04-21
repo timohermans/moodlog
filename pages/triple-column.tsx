@@ -7,7 +7,11 @@ interface Props {}
 
 function TripleColumn({}: Props) {
   function handleNewThought(thought: TripleColumnThought): void {
-    
+    fetch('/api/triple-column/create', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(thought),
+    })
   }
 
   return (

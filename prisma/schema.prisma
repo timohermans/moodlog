@@ -1,0 +1,18 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model TripleColumnThought {
+    id                  Int      @id @default(autoincrement())
+    createdAt           DateTime @default(now())
+    updatedAt           DateTime @updatedAt
+    automaticThought    String
+    cognitiveDistortion String
+    rationaleResponse   String
+    userId              String
+}
