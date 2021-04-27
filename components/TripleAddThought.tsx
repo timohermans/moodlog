@@ -1,13 +1,9 @@
 import { Field, Form, Formik } from 'formik'
+import { schema } from 'lib/triple-column-thought/create-and-update-validator'
+import { TripleColumnThoughtInput } from 'lib/triple-column-thought/create-and-update-type'
 
 interface Props {
-  onNewThought: (thought: TripleColumnThought) => void
-}
-
-export interface TripleColumnThought {
-  automaticThought: string
-  cognitiveDistortion: string
-  rationaleResponse: string
+  onNewThought: (thought: TripleColumnThoughtInput) => void
 }
 
 const TripleAddThought = ({ onNewThought }: Props) => {
@@ -25,17 +21,7 @@ const TripleAddThought = ({ onNewThought }: Props) => {
         cognitiveDistortion: '',
         rationaleResponse: '',
       }}
-      validate={(values) => {
-        const errors: {
-          automaticThought?: string
-          cognitiveDistortion?: string
-          rationaleResponse?: string
-        } = {}
-        if (!values.automaticThought) errors.automaticThought = 'Required'
-        if (!values.cognitiveDistortion) errors.cognitiveDistortion = 'Required'
-        if (!values.rationaleResponse) errors.rationaleResponse = 'Required'
-        return errors
-      }}
+      validationSchema={schema}
       onSubmit={(data) => onNewThought(data)}
     >
       {({ values, errors, touched, handleBlur, handleChange }) => (

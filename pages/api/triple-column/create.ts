@@ -1,22 +1,17 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import prisma from "lib/prisma"
-import { getSession } from "next-auth/client";
-import { KeycloakSession } from "../../../lib/types/keycloak-session";
+import { NextApiRequest, NextApiResponse } from 'next'
+import { getSession } from 'next-auth/client'
+import { KeycloakSession } from 'lib/types/keycloak-session'
+import { handle } from 'lib/triple-column-thought/create-and-update-handler'
+import { withErrorHandling } from 'lib/middlewares/with-error-handling'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-    if (req.method === 'GET') return res.status(405);
+const handler = async (req: NextApiRequest, res: NextApiResponse<any>) => {
+  if (req.method === 'GET') return res.status(405)
 
-    const session = await getSession({ req }) as KeycloakSession;
+  const session = (await getSession({ req })) as KeycloakSession
 
-    const formData = req.body;
+  await handle(req.body, session.user.id)
 
-    await prisma.tripleColumnThought.create({
-        data: {
-            automaticThought: formData.automaticThought,
-            cognitiveDistortion: formData.cognitiveDistortion,
-            rationaleResponse: formData.rationaleResponse,
-            userId: session.user.id
-        }
-    })
-    res.status(200).end()
+  res.status(200).end()
 }
+
+export default withErrorHandling(handler)
