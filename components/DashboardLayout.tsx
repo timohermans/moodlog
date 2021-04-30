@@ -9,15 +9,15 @@ interface Props {
 
 const DashboardLayout = (props: Props) => {
   return (
-    <div className="flex h-screen bg-blue-900">
+    <div className="flex min-h-full bg-blue-900">
       <Head>
         <title>{props.pageTitle} | Moodlog</title>
       </Head>
 
       <SideNav />
 
-      <div className="p-2 w-full">
-        <main className="p-4 bg-gray-100 rounded-3xl h-full w-full">
+      <div className="min-h-full p-2 w-full">
+        <main className="min-h-full p-4 bg-gray-100 rounded-3xl w-full">
           {props.children}
         </main>
       </div>

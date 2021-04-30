@@ -6,7 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "test": "cypress open"
+        "test": "cypress open",
+        "db:reset": "npx ts-node --project ./cypress/scripts/node.tsconfig.json ./cypress/scripts/reset-db.ts "
     },
     "dependencies": {
         "@prisma/client": "^2.21.2",

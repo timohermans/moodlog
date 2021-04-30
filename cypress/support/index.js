@@ -24,6 +24,7 @@ Cypress.Cookies.defaults({
 })
 
 beforeEach(() => {
+    cy.exec('npm run db:reset')
     cy.getCookies()
         .then(cookies => {
             if (!cookies.some(cookie => cookie.name === 'next-auth.session-token')) cy.login({});

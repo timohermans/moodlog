@@ -3,7 +3,7 @@ import { schema } from 'lib/triple-column-thought/create-and-update-validator'
 import { TripleColumnThoughtInput } from 'lib/triple-column-thought/create-and-update-type'
 
 interface Props {
-  onNewThought: (thought: TripleColumnThoughtInput) => void
+  onNewThought: (thought: TripleColumnThoughtInput) => void | Promise<void>
 }
 
 const TripleAddThought = ({ onNewThought }: Props) => {
@@ -22,7 +22,10 @@ const TripleAddThought = ({ onNewThought }: Props) => {
         rationaleResponse: '',
       }}
       validationSchema={schema}
-      onSubmit={(data) => onNewThought(data)}
+      onSubmit={async (data, { resetForm }) => {
+        await onNewThought(data)
+        resetForm()
+      }}
     >
       {({ values, errors, touched, handleBlur, handleChange }) => (
         <Form>
