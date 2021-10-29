@@ -2,9 +2,10 @@ import NextAuth, { Session, User } from 'next-auth'
 import Providers from 'next-auth/providers'
 import { WithAdditionalParams } from "next-auth/_utils";
 
-const baseUrl = `https://${process.env.REACT_APP_KEYCLOAK_DOMAIN}/auth/realms/${process.env.REACT_APP_KEYCLOAK_REALM}/protocol/openid-connect`;
+const baseUrl = `${process.env.REACT_APP_KEYCLOAK_DOMAIN}/auth/realms/${process.env.REACT_APP_KEYCLOAK_REALM}/protocol/openid-connect`;
 
 export default NextAuth({
+    useSecureCookies: process.env.USE_HTTPS === "true",
     callbacks: {
         async session(session, token) {
             return Promise.resolve({
@@ -32,7 +33,7 @@ export default NextAuth({
 
             clientId: process.env.REACT_APP_KEYCLOAK_CLIENTID,
             domain: process.env.REACT_APP_KEYCLOAK_DOMAIN,
-            clientSecret: undefined,
+            clientSecret: process.env.REACT_APP_KEYCLOAK_CLIENT_SECRET,
             accessTokenUrl: `${baseUrl}/token`,
             requestTokenUrl: `${baseUrl}/auth`,
             authorizationUrl: `${baseUrl}/auth?response_type=code`,

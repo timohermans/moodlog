@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    container_name: postgres-db
+    ports:
+      - '2345:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    env_file: .env
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=keycloak
+
+  keycloak:
+    container_name: keycloak
+    restart: unless-stopped
+    image: jboss/keycloak
+    depends_on:
+      - db
+    ports:
+      - '7777:8080'
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=postgres
+      - DB_ADDR=db:5432
+      - DB_DATABASE=keycloak
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - PROXY_ADDRESS_FORWARDING=true
+
+volumes:
+  postgres:

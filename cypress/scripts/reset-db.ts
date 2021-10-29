@@ -6,7 +6,7 @@ dotenv.config()
 const prisma = new PrismaClient()
 
 async function deleteAllData() {
-  console.log('Removing tiple column thought data')
+  console.log('Removing triple column thought data')
   await prisma.tripleColumnThought.deleteMany()
 }
 
